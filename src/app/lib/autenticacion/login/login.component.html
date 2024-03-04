@@ -1,0 +1,27 @@
+
+
+<form action="" method="post">
+  <div class="imgcontainer">
+    <h2>{{tituloform}}</h2>
+    <img src="https://th.bing.com/th/id/OIP.RrAhPkvCrkx1D4Kxz1L-gQHaHa?rs=1&pid=ImgDetMain" alt="Avatar" class="avatar">
+  </div>
+
+  <div class="container">
+    <label for="emailUser"><b>Email</b></label>
+    <input type="email" [(ngModel)]="emailUser" [ngModelOptions]="{standalone: true}" placeholder="Enter Username" id="emailUser" required>
+
+    <label for="passuser"><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" id="passuser" required>
+
+    <button type="submit" (click)="login()">Login</button>
+
+    <p>{{mensajalogin}}</p>
+
+  </div>
+
+  <div class="container">
+    <button type="button" class="cancelbtn">Cancel</button>
+    <button type="button" class="registerbtn">Register</button>
+    <span class="psw">Recuperar <a href="#">password?</a></span>
+  </div>
+</form>
