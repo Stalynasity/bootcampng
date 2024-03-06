@@ -12,7 +12,8 @@ export class LoginComponent {
 
   mensajalogin='';
   emailUser: string = '';
-  tituloform:string = 'Titulo de form';
+  psw: string = '';
+  tituloform:string = 'Login';
 
   /*saludar = () => {
     this.mensajalogin = 'Bienvenido user: ' + this.emailUser
@@ -21,14 +22,20 @@ export class LoginComponent {
 
   login(){
 
-    if (this.usermailPRederterminado === this.emailUser) {
-
-    } else{
-      this.mensajalogin = 'Error'
+    if(this.usermailPRederterminado !== this.emailUser){
+      this.mensajalogin = 'Error email'
+      return
     }
 
-    this.mensajalogin = 'Bienvenido ' + this.emailUser
+    if (this.passuserPredeterminado !== this.psw) {
+      this.mensajalogin = 'Error contraseña'
+      return
+    }
+
+    this.mensajalogin = "Bienvenido " + this.emailUser
 
   }
+
+
 
 }

@@ -1,0 +1,86 @@
+<div class="container">
+  <div class="row">
+
+    <div>
+      <h2>Lista de Productos</h2>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Producto</th>
+            <th>Modelo</th>
+            <th>Proveedores</th>
+            <th>Precio</th>
+            <th>Stock</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let producto of listaProducto">
+            <td>{{producto.producto}}</td>
+            <td>{{producto.modelo}}</td>
+            <td>{{producto.proveedor}}</td>
+            <td>{{producto.precio}}</td>
+            <td>{{producto.stock}}</td>
+            <td>
+              <button type="button" *ngIf="!validarStock(producto)" class="btn btn-success me-2" (click)="agregarProducto(producto)">Agregar</button>
+              <button type="button" *ngIf="validarStock(producto)" class="btn btn-success me-2" (click)="agregarProducto(producto)" disabled>Agregar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+    <div class="col-md-6 ">
+      <h2>Productos Agregados</h2>
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Producto</th>
+              <th>Modelo</th>
+              <th>Proveedores</th>
+              <th>Precio</th>
+              <th>Cantidad</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let producto of listaCarrito">
+              <td>{{producto.producto}}</td>
+              <td>{{producto.modelo}}</td>
+              <td>{{producto.proveedor}}</td>
+              <td>{{producto.precio}}</td>
+              <td>{{producto.cantidad}}</td>
+              <td>
+                <button type="button" class="btn btn-danger me-2" (click)="eliminarProducto(producto)">Eliminar</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="col-md-4 mx-auto">
+      <h2>Factura</h2>
+      <div class="row">
+
+        <label for="totalProductos">Total Productos:</label>
+        <input type="text" value="{{totalProducto}}" id="totalProductos" class="form-control" readonly>
+
+        <label for="subtotalProductos">Subtotal:</label>
+        <input type="text" value="{{subtotal}}" id="subtotalProductos" class="form-control" readonly>
+
+        <label for="ivaProductos">Iva 12%:</label>
+        <input type="text" value="{{impuesto}}" id="ivaProductos" class="form-control" readonly>
+
+        <label for="totalPagoProductos">Total a pagar:</label>
+        <input type="text" value="{{totalpago}}" id="totalPagoProductos" class="form-control" readonly>
+
+      </div>
+    </div>
+
+
+
+  </div>
+</div>
