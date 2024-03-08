@@ -1,7 +1,7 @@
 <ng-container *ngIf="pageLogin">
-  <app-auth-login></app-auth-login>
+  <app-auth-login (evento)="Activador($event)" [data]="datos"></app-auth-login>
 </ng-container>
 
 <ng-container *ngIf="!pageLogin">
-  <app-signup></app-signup>
+  <app-signup (eventoSiupEmitir)="EventoSingUp($event)" (eventoLogin)="Activador($event)" ></app-signup>
 </ng-container>

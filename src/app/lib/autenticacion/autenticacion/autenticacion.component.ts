@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Usuario } from '../interface/Usuario.interface';
+
+
 
 @Component({
   selector: 'app-autenticacion',
@@ -7,6 +10,19 @@ import { Component } from '@angular/core';
 })
 export class AutenticacionComponent {
 
+
+  datos:Usuario[] = [];
+
+  EventoSingUp(usuario: Usuario) {
+    this.Activador(true)
+    console.log('Datos de usuario recibidos:', usuario);
+    this.datos.push(usuario)
+  }
+
   pageLogin:boolean = true;
+
+  Activador(ocultar: boolean){
+    this.pageLogin = ocultar;
+  }
 
 }

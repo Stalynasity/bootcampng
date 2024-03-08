@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Usuario } from '../interface/Usuario.interface';
 
 @Component({
   selector: 'app-auth-login',
@@ -6,6 +7,11 @@ import { Component } from '@angular/core';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
+
+  @Output() evento = new EventEmitter<boolean>();
+
+  @Input() data:Usuario[] = [];
+
 
   usermailPRederterminado= 'stalynasi08@gmail.com'
   passuserPredeterminado= '123456'
@@ -15,6 +21,8 @@ export class LoginComponent {
   psw: string = '';
   tituloform:string = 'Login';
 
+
+
   /*saludar = () => {
     this.mensajalogin = 'Bienvenido user: ' + this.emailUser
   }*/
@@ -22,12 +30,14 @@ export class LoginComponent {
 
   login(){
 
-    if(this.usermailPRederterminado !== this.emailUser){
+    const usuarioRegistrado:Usuario | undefined = this.data.find(Usuario => Usuario.email === this.emailUser)
+
+    if(!usuarioRegistrado){
       this.mensajalogin = 'Error email'
       return
     }
 
-    if (this.passuserPredeterminado !== this.psw) {
+    if (usuarioRegistrado.password !== this.psw) {
       this.mensajalogin = 'Error contraseña'
       return
     }
@@ -36,6 +46,8 @@ export class LoginComponent {
 
   }
 
-
+  cambioRegistro(){
+    this.evento.emit(false);
+  }
 
 }

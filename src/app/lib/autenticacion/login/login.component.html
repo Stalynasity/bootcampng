@@ -9,8 +9,8 @@
     <div class="container">
       <div class="mt-2">
         <label for="emailUser"><b>Email</b></label>
-        <input type="email" [(ngModel)]="emailUser" [ngModelOptions]="{standalone: true}" placeholder="Enter Username"
-          id="emailUser" class="form-control mt-2">
+        <input type="email" [(ngModel)]="emailUser" [ngModelOptions]="{standalone: true}" id="emailUser"
+          class="form-control mt-2">
       </div>
 
       <div class="mt-4">
@@ -21,7 +21,7 @@
 
       <div class="d-grid gap-2 my-4">
         <button type="submit" (click)="login()" class="btn btn-primary">Login</button>
-        <button type="button" class="registerbtn btn btn-success mt-2" routerLink='/signup'> Register </button>
+        <button type="button" class="registerbtn btn btn-success mt-2" (click)="cambioRegistro()"> Register </button>
       </div>
 
       <p>{{mensajalogin}}</p>
