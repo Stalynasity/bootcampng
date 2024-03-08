@@ -4,6 +4,7 @@ import { HeaderComponent } from './header/header.component';
 import { InputfornComponent } from './inputforn/inputforn.component';
 import { LoadingComponent } from './loading/loading.component';
 import { BotonestablaComponent } from './botonestabla/botonestabla.component';
+import { MenuComponent } from './menu/menu.component';
 
 
 
@@ -12,7 +13,8 @@ import { BotonestablaComponent } from './botonestabla/botonestabla.component';
     BotonestablaComponent,
     HeaderComponent,
     InputfornComponent,
-    LoadingComponent
+    LoadingComponent,
+    MenuComponent
   ],
   imports: [
     CommonModule
@@ -21,7 +23,8 @@ import { BotonestablaComponent } from './botonestabla/botonestabla.component';
     BotonestablaComponent,
     HeaderComponent,
     InputfornComponent,
-    LoadingComponent
+    LoadingComponent,
+    MenuComponent
   ]
 })
 export class SharedModule { }

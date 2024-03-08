@@ -1,6 +1,10 @@
+
+<div>
+  <app-menu [menuItems]="opciones" ></app-menu>
+</div>
+
 <div class="container">
   <div class="row">
-
     <div>
       <h2>Lista de Productos</h2>
       <table class="table table-striped">
@@ -53,7 +57,8 @@
               <td>{{producto.precio}}</td>
               <td>{{producto.cantidad}}</td>
               <td>
-                <button type="button" class="btn btn-danger me-2" (click)="eliminarProducto(producto)">Eliminar</button>
+                <!-- <button type="button" class="btn btn-danger me-2" (click)="eliminarProducto(producto)">Eliminar</button> -->
+                <app-botonestabla [propertiesBtn] = "porpiedadesBtnTB" (eventoEliminar)="eliminarProducto(producto)"></app-botonestabla>
               </td>
             </tr>
           </tbody>

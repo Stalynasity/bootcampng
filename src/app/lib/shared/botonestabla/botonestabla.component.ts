@@ -18,6 +18,15 @@ export class BotonestablaComponent {
     mostrarEliminar: true,
   }
 
+  eventEliminar(){
+    this.eventoEliminar.emit();
+  }
+
+  eventEditar(){
+    this.eventoEditar.emit();
+  }
+
+
 
 
 }
