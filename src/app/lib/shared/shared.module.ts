@@ -5,6 +5,7 @@ import { InputfornComponent } from './inputforn/inputforn.component';
 import { LoadingComponent } from './loading/loading.component';
 import { BotonestablaComponent } from './botonestabla/botonestabla.component';
 import { MenuComponent } from './menu/menu.component';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -14,10 +15,12 @@ import { MenuComponent } from './menu/menu.component';
     HeaderComponent,
     InputfornComponent,
     LoadingComponent,
-    MenuComponent
+    MenuComponent,
+
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule
   ],
   exports: [
     BotonestablaComponent,

@@ -1,12 +1,13 @@
-<div>
-  <ul class="list-group list-group-flush" *ngFor="let menuitem of menuItemsPorRol">
-    <li>
-      <button class="list-group-item">
-        <i class="bi bi-{{ menuitem.icon }}" ></i>
-              {{ menuitem.opcion }}
-      </button>
+
+<div class="d-flex justify-content-center py-3">
+  <ul class="nav nav-pills" *ngFor="let menuitem of menuItemsPorRol">
+
+    <li class="nav-item">
+      <a href="#" class="nav-link">
+        <i class="bi bi-{{ menuitem.icon }}"></i>
+        {{ menuitem.opcion }}</a>
     </li>
   </ul>
 </div>
 
-
+<!-- <li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Home</a></li> -->

@@ -1,8 +1,4 @@
 
-<div>
-  <app-menu [menuItems]="opciones" ></app-menu>
-</div>
-
 <div class="container">
   <div class="row">
     <div>
@@ -15,11 +11,11 @@
             <th>Proveedores</th>
             <th>Precio</th>
             <th>Stock</th>
-            <th>Acciones</th>
+            <th colspan="2">Acciones</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let producto of listaProducto">
+          <tr *ngFor="let producto of listaproducto">
             <td>{{producto.producto}}</td>
             <td>{{producto.modelo}}</td>
             <td>{{producto.proveedor}}</td>
@@ -28,6 +24,7 @@
             <td>
               <button type="button" *ngIf="!validarStock(producto)" class="btn btn-success me-2" (click)="agregarProducto(producto)">Agregar</button>
               <button type="button" *ngIf="validarStock(producto)" class="btn btn-success me-2" (click)="agregarProducto(producto)" disabled>Agregar</button>
+              <app-detalleproducto [modalProducto]="producto.productoid" [producto]="producto" ></app-detalleproducto>
             </td>
           </tr>
         </tbody>

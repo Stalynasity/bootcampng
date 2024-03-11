@@ -11,83 +11,69 @@ import { PropertiesItem } from '../../interface/menuitem.interface';
 })
 export class TableComponent {
 
-opciones:PropertiesItem[] = [
-  {
-      idopcion: 1,
-      idrol: 1,
-      opcion: "Home",
-      icon:"house-door-fill"
-  },
-  {
-      "idopcion": 4,
-      "idrol": 1,
-      "opcion": "Users",
-      "icon":"person-fill-gear"
-  },
-  {
-      "idopcion": 1,
-      "idrol": 2,
-      "opcion": "Home",
-      "icon":"house-door-fill"
-  },
-  {
-      "idopcion": 1,
-      "idrol": 3,
-      "opcion": "Home",
-      "icon":"house-door-fill"
-  },
-  {
-      "idopcion": 2,
-      "idrol": 2,
-      "opcion": "Comprar",
-      "icon":"cart-fill"
-  },
-  {
-      "idopcion": 2,
-      "idrol": 3,
-      "opcion": "Comprar",
-      "icon":"cart-fill"
-  },
-  {
-      "idopcion": 3,
-      "idrol": 2,
-      "opcion": "Docs",
-      "icon":"clipboard2-fill"
-  }
-  ];
-
   totalProducto: number = 0;
   subtotal: number = 0;
   impuesto: number = 0;
   totalpago: number = 0;
 
-  listaProducto: ProductDetail[] =
-    [
-      {
-        productoid: 1,
-        producto: 'PS5',
-        modelo: 'Sony',
-        proveedor: 'Soni USA',
-        precio: 600.00,
-        stock: 10,
-      },
-      {
-        productoid: 2,
-        producto: 'PC Gamer',
-        modelo: 'Intel',
-        proveedor: 'USA Lam',
-        precio: 850.00,
-        stock: 50
-      },
-      {
-        productoid: 3,
-        producto: 'xBox',
-        modelo: 'Panasony',
-        proveedor: 'FRC',
-        precio: 10.00,
-        stock: 60
-      },
-    ]
+  listaproducto: ProductDetail[] = [
+    {
+      productoid: 1,
+      producto: "Play Station 5",
+      modelo: "Ultra Slim",
+      proveedor: "H&B sa",
+      precio: 600.00,
+      stock: 40,
+      categoria: "OC",
+      accesorios: {
+        incluyecontrols: 1,
+        incluyegearAR: 0
+      }
+    },
+    {
+      productoid: 2,
+      producto: "PC Gammer",
+      modelo: "AS-001-wm",
+      proveedor: "Asus",
+      precio: 850.00,
+      stock: 21,
+      categoria: "OC",
+      accesorios: {
+        "incluyemouse": 0
+      }
+    },
+    {
+      "productoid": 3,
+      "producto": "MousePad",
+      "modelo": "MP-2001-A",
+      "proveedor": "Juan Marcet",
+      "precio": 10.00,
+      "stock": 3,
+      "categoria": "VA",
+      "accesorios": {}
+    },
+    {
+      "productoid": 4,
+      "producto": "Doppler",
+      "modelo": "2HXDB",
+      "proveedor": "General Electric",
+      "precio": 120.00,
+      "stock": 11,
+      "categoria": "HT"
+    },
+    {
+      "productoid": 5,
+      "producto": "AirFried",
+      "modelo": "ZY 2020",
+      "proveedor": "Hometech",
+      "precio": 230.00,
+      "stock": 20,
+      "categoria": "CO",
+      "accesorios": {
+
+      }
+    }
+  ];
 
   listaCarrito: ProductDetail[] = [];
 
@@ -97,8 +83,7 @@ opciones:PropertiesItem[] = [
     if (productExistente) {
       if (productExistente.stock <= 0) {
         console.log("no hay stock");
-      } else
-      {
+      } else {
         productExistente.stock -= 1;
         productExistente.cantidad = (productExistente.cantidad || 0) + 1;
 
@@ -115,11 +100,11 @@ opciones:PropertiesItem[] = [
   }
 
 
-  eliminarProducto(producto: ProductDetail):number | undefined {
+  eliminarProducto(producto: ProductDetail): number | undefined {
     const indiceProducto = this.listaCarrito.findIndex(p => p.productoid === producto.productoid);
 
     if (indiceProducto !== -1) {
-      const productoEliminado =  this.listaCarrito.splice(indiceProducto, 1)[0];
+      const productoEliminado = this.listaCarrito.splice(indiceProducto, 1)[0];
       productoEliminado.stock += productoEliminado.cantidad!;
       this.realizarCalculo();
       return productoEliminado.stock;
@@ -128,25 +113,25 @@ opciones:PropertiesItem[] = [
   }
 
 
-  realizarCalculo(){
-      this.totalProducto = 0;
-      this.subtotal = 0;
-      this.impuesto = 0;
-      this.totalpago= 0;
+  realizarCalculo() {
+    this.totalProducto = 0;
+    this.subtotal = 0;
+    this.impuesto = 0;
+    this.totalpago = 0;
 
     this.listaCarrito.forEach(producto => {
       this.totalProducto += producto.cantidad ?? 0;
       this.subtotal += (producto.precio * (producto.cantidad ?? 0));
     });
 
-      this.impuesto += this.subtotal * 0.12;
-      this.totalpago += this.subtotal + this.impuesto;
+    this.impuesto += this.subtotal * 0.12;
+    this.totalpago += this.subtotal + this.impuesto;
 
   }
 
 
   validarStock(prodSeleccionado: ProductDetail): boolean {
-    let identificarProd = this.listaProducto.find(p => p.productoid === prodSeleccionado.productoid)
+    let identificarProd = this.listaproducto.find(p => p.productoid === prodSeleccionado.productoid)
     if (identificarProd) {
       if (identificarProd.stock <= 0) {
         return true

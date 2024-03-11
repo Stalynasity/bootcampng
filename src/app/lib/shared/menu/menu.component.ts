@@ -15,19 +15,12 @@ export class MenuComponent implements OnInit, OnChanges {
 
 
 
-
-
   ngOnInit(): void {
-
-    this.menuItems.forEach(item => {
-      if (item.idrol === this.rolUser) {
-        this.menuItemsPorRol.push(item);
-      }
-    })
+    this.menuItemsPorRol = this.menuItems.filter(x => x.idrol === this.rolUser)
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    throw new Error('Method not implemented.');
+
   }
 
 

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component} from '@angular/core';
 import { Usuario } from '../interface/Usuario.interface';
 
 
@@ -14,7 +14,6 @@ export class AutenticacionComponent {
   datos:Usuario[] = [];
 
   EventoSingUp(usuario: Usuario) {
-    this.Activador(true)
     console.log('Datos de usuario recibidos:', usuario);
     this.datos.push(usuario)
   }

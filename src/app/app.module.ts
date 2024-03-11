@@ -8,13 +8,12 @@ import { FormsModule } from '@angular/forms';
 
 import { AutenticacionModule } from './lib/autenticacion/autenticacion.module';
 import { SharedModule } from './lib/shared/shared.module';
-import { TableComponent } from './lib/ejemplo/table/table.component';
+import { EjemploModule } from './lib/ejemplo/ejemplo.module';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    TableComponent
   ],
   imports: [
     BrowserModule,
@@ -22,6 +21,7 @@ import { TableComponent } from './lib/ejemplo/table/table.component';
     FormsModule,
     AutenticacionModule,
     SharedModule,
+    EjemploModule
   ],
   providers: [],
   bootstrap: [AppComponent]

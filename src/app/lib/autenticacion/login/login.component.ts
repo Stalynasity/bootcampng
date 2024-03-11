@@ -10,7 +10,7 @@ export class LoginComponent {
 
   @Output() evento = new EventEmitter<boolean>();
 
-  @Input() data:Usuario[] = [];
+  @Input() dataALogin:Usuario[] = [];
 
 
   usermailPRederterminado= 'stalynasi08@gmail.com'
@@ -30,7 +30,7 @@ export class LoginComponent {
 
   login(){
 
-    const usuarioRegistrado:Usuario | undefined = this.data.find(Usuario => Usuario.email === this.emailUser)
+    const usuarioRegistrado:Usuario | undefined = this.dataALogin.find(Usuario => Usuario.email === this.emailUser)
 
     if(!usuarioRegistrado){
       this.mensajalogin = 'Error email'

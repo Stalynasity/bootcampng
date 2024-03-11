@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { AutenticacionComponent } from './autenticacion/autenticacion.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { SignupComponent } from './signup/signup.component';
     CommonModule,
     FormsModule,
     RouterModule,
+    SharedModule
   ],
 
   exports:[

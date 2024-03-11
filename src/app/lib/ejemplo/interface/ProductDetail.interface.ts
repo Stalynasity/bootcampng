@@ -6,5 +6,6 @@ export interface ProductDetail{
   precio:number,
   cantidad?:number,
   stock:number,
-
+  categoria: string,
+  accesorios?: any
 }
