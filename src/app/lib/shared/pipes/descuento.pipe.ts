@@ -1,3 +1,4 @@
+
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
@@ -5,8 +6,9 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class DescuentoPipe implements PipeTransform {
 
-  transform(value: unknown, ...args: unknown[]): unknown {
-    return null;
+  transform(descuento: number): number {
+    let recibido_descuento = descuento * 0.02;
+    let descuento_final = descuento - recibido_descuento;
+    return descuento_final
   }
-
 }

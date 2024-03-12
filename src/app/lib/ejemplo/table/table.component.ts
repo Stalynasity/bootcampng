@@ -15,7 +15,6 @@ export class TableComponent {
   subtotal: number = 0;
   impuesto: number = 0;
   totalpago: number = 0;
-  descuento: number = 0;
 
   listaproducto: ProductDetail[] = [
     {
@@ -77,9 +76,9 @@ export class TableComponent {
   ];
 
   listaCarrito: ProductDetail[] = [];
-
-
   nameOrden: string = '';
+
+
   cambiarOrden(nameOrden: string){
     this.nameOrden = nameOrden;
   }
@@ -128,17 +127,17 @@ export class TableComponent {
   realizarCalculo() {
     this.totalProducto = 0;
     this.subtotal = 0;
-    this.descuento = 0
-    this.impuesto = 0;
-    this.totalpago = 0;
+    // this.impuesto = 0;
+    // this.totalpago = 0;
 
     this.listaCarrito.forEach(producto => {
       this.totalProducto += producto.cantidad ?? 0;
       this.subtotal += (producto.precio * (producto.cantidad ?? 0));
     });
 
-    this.impuesto += this.subtotal * 0.12;
-    this.totalpago += this.subtotal + this.impuesto;
+    let descuento = this.subtotal - (this.subtotal * 0.02);
+    let iva = descuento + (descuento * 0.12);
+    this.totalpago = iva;
 
   }
 
@@ -166,7 +165,7 @@ export class TableComponent {
 
 
   ValidBtPago(): boolean {
-    if (this.totalpago !== 0) {
+    if (this.totalProducto !== 0) {
       return true
     }
     return false

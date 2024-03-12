@@ -10,6 +10,7 @@ import { AgregarproductoComponent } from './agregarproducto/agregarproducto.comp
 import { GeneralpipePipe } from './pipes/generalpipe.pipe';
 import { OrdenarPipe } from './pipes/ordenar.pipe';
 import { DescuentoPipe } from './pipes/descuento.pipe';
+import { IvaPipe } from './pipes/iva.pipe';
 
 
 
@@ -23,7 +24,8 @@ import { DescuentoPipe } from './pipes/descuento.pipe';
     AgregarproductoComponent,
     GeneralpipePipe,
     OrdenarPipe,
-    DescuentoPipe
+    DescuentoPipe,
+    IvaPipe
 
   ],
   imports: [
@@ -38,7 +40,9 @@ import { DescuentoPipe } from './pipes/descuento.pipe';
     MenuComponent,
     AgregarproductoComponent,
     GeneralpipePipe,
-    OrdenarPipe
+    OrdenarPipe,
+    DescuentoPipe,
+    IvaPipe
   ]
 })
 export class SharedModule { }

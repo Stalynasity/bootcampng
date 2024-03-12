@@ -55,7 +55,7 @@
       </table>
     </div>
 
-    <div>
+    <div class="mb-3" >
       <app-agregarproducto (eventoModal)="nuevoProducto($event)"
         (eventoCierreModal)="mensajeCerrar($event)"></app-agregarproducto>
     </div>
@@ -105,10 +105,10 @@
         <input type="text" value="{{subtotal | currency}}" id="subtotalProductos" class="form-control" readonly>
 
         <label for="subtotalProductos">Descuento:</label>
-        <input type="text" value="{{descuento | currency}}" id="descuentoProductos" class="form-control" readonly>
+        <input type="text" value="{{subtotal | descuento | currency }}" id="descuentoProductos" class="form-control" readonly>
 
         <label for="ivaProductos">Iva 12%:</label>
-        <input type="text" value="{{impuesto | currency}}" id="ivaProductos" class="form-control" readonly>
+        <input type="text" value="{{subtotal | descuento | iva }}" id="ivaProductos" class="form-control" readonly>
 
         <label for="totalPagoProductos">Total a pagar:</label>
         <input type="text" value="{{totalpago | currency}} " id="totalPagoProductos" class="form-control" readonly>
