@@ -7,6 +7,9 @@ import { BotonestablaComponent } from './botonestabla/botonestabla.component';
 import { MenuComponent } from './menu/menu.component';
 import { FormsModule } from '@angular/forms';
 import { AgregarproductoComponent } from './agregarproducto/agregarproducto.component';
+import { GeneralpipePipe } from './pipes/generalpipe.pipe';
+import { OrdenarPipe } from './pipes/ordenar.pipe';
+import { DescuentoPipe } from './pipes/descuento.pipe';
 
 
 
@@ -18,6 +21,9 @@ import { AgregarproductoComponent } from './agregarproducto/agregarproducto.comp
     LoadingComponent,
     MenuComponent,
     AgregarproductoComponent,
+    GeneralpipePipe,
+    OrdenarPipe,
+    DescuentoPipe
 
   ],
   imports: [
@@ -30,7 +36,9 @@ import { AgregarproductoComponent } from './agregarproducto/agregarproducto.comp
     InputfornComponent,
     LoadingComponent,
     MenuComponent,
-    AgregarproductoComponent
+    AgregarproductoComponent,
+    GeneralpipePipe,
+    OrdenarPipe
   ]
 })
 export class SharedModule { }

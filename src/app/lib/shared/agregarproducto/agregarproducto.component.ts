@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 import { ProductDetail } from '../../ejemplo/interface/ProductDetail.interface';
 
 @Component({
@@ -6,10 +6,13 @@ import { ProductDetail } from '../../ejemplo/interface/ProductDetail.interface';
   templateUrl: './agregarproducto.component.html',
   styleUrl: './agregarproducto.component.css'
 })
-export class AgregarproductoComponent {
+export class AgregarproductoComponent implements OnInit {
+  ngOnInit(): void {
+
+  }
 
 
-  nuevoProducto: ProductDetail= {
+  nuevoProducto: ProductDetail = {
     productoid: 0,
     producto: '',
     modelo: '',
@@ -18,6 +21,9 @@ export class AgregarproductoComponent {
     stock: 0,
     categoria: ''
   };
+
+  ErrorMenssag: boolean = false
+
 
   @Input()
   modalProducto?: any;
@@ -31,7 +37,41 @@ export class AgregarproductoComponent {
   }
 
   handleEventoGuardar(): void {
-    this.eventoModal.emit(this.nuevoProducto);
+    if (this.validarDatos()) {
+      this.eventoModal.emit(this.nuevoProducto);
+    }
   }
+
+
+
+
+  validaInputBT(nuevoProducto: ProductDetail ): boolean{
+    if (
+      nuevoProducto.producto.trim() === '' ||
+      nuevoProducto.modelo.trim() === '' ||
+      nuevoProducto.proveedor.trim() === '' ||
+      nuevoProducto.precio === 0 ||
+      nuevoProducto.stock === 0 ||
+      nuevoProducto.categoria.trim() === ''
+    ) {
+      return false; // Si algún campo está vacío o tiene valor 0, devuelve falso
+    }
+    return true; // Si todos los campos están llenos, devuelve verdadero
+  }
+
+
+  validarDatos(): boolean {
+    if (!this.nuevoProducto.producto ||
+      !this.nuevoProducto.modelo ||
+      !this.nuevoProducto.proveedor ||
+      !this.nuevoProducto.precio ||
+      !this.nuevoProducto.stock ||
+      !this.nuevoProducto.categoria) {
+      // Si algún campo está vacío, devuelve falso
+      return false;
+    }
+    return true;
+  }
+
 
 }

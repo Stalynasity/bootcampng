@@ -15,6 +15,7 @@ export class TableComponent {
   subtotal: number = 0;
   impuesto: number = 0;
   totalpago: number = 0;
+  descuento: number = 0;
 
   listaproducto: ProductDetail[] = [
     {
@@ -77,6 +78,15 @@ export class TableComponent {
 
   listaCarrito: ProductDetail[] = [];
 
+
+  nameOrden: string = '';
+  cambiarOrden(nameOrden: string){
+    this.nameOrden = nameOrden;
+  }
+
+
+
+
   agregarProducto(producto: ProductDetail) {
     const productExistente = this.listaCarrito.find(p => p.productoid === producto.productoid);
 
@@ -100,6 +110,7 @@ export class TableComponent {
   }
 
 
+
   eliminarProducto(producto: ProductDetail): number | undefined {
     const indiceProducto = this.listaCarrito.findIndex(p => p.productoid === producto.productoid);
 
@@ -113,9 +124,11 @@ export class TableComponent {
   }
 
 
+
   realizarCalculo() {
     this.totalProducto = 0;
     this.subtotal = 0;
+    this.descuento = 0
     this.impuesto = 0;
     this.totalpago = 0;
 
@@ -130,17 +143,18 @@ export class TableComponent {
   }
 
 
+
   validarStock(prodSeleccionado: ProductDetail): boolean {
     let identificarProd = this.listaproducto.find(p => p.productoid === prodSeleccionado.productoid)
     if (identificarProd) {
-      if (identificarProd.stock <= 0) {
+      if (identificarProd.stock > 0) {
         return true
-      } else {
-        return false
       }
     }
     return false;
   }
+
+
 
   porpiedadesBtnTB: PropertiesBtnTabla = {
     labelEdiar: "Editar",
@@ -148,6 +162,7 @@ export class TableComponent {
     mostrarEditar: true,
     mostrarEliminar: true,
   }
+
 
 
   ValidBtPago(): boolean {
@@ -159,5 +174,15 @@ export class TableComponent {
 
 
 
+  nuevoProducto(producto: ProductDetail){
+    let ultimoId = this.listaproducto.length + 1;
+    producto.productoid = ultimoId;
+    this.listaproducto.push(producto)
+  }
+
+
+
+  mensajeCerrar(e:any){
+  }
 
 }

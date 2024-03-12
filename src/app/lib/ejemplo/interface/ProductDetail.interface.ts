@@ -1,3 +1,5 @@
+import { CurrencyPipe } from "@angular/common";
+
 export interface ProductDetail{
   productoid: number,
   producto: string,

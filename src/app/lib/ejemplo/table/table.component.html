@@ -2,6 +2,27 @@
   <div class="row">
     <div>
       <h2>Lista de Productos</h2>
+
+      <div>
+        <span class="text-primary me-3"><b>Ordenar por: </b></span>
+        <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+          <input type="radio" class="btn-check" name="btnorden" id="nombre" (click)="cambiarOrden('nombre')" autocomplete="off" checked>
+          <label class="btn btn-outline-primary" for="nombre">Nombre</label>
+
+          <input type="radio" class="btn-check" name="btnorden" id="modelo" (click)="cambiarOrden('modelo')" autocomplete="off">
+          <label class="btn btn-outline-primary" for="modelo">Modelo</label>
+
+          <input type="radio" class="btn-check" name="btnorden" id="proveedor" (click)="cambiarOrden('proveedor')" autocomplete="off">
+          <label class="btn btn-outline-primary" for="proveedor">Proveedor</label>
+
+          <input type="radio" class="btn-check" name="btnorden" id="precio" (click)="cambiarOrden('precio')" autocomplete="off">
+          <label class="btn btn-outline-primary" for="precio">Precio</label>
+
+          <input type="radio" class="btn-check" name="btnorden" id="stock" (click)="cambiarOrden('stock')" autocomplete="off">
+          <label class="btn btn-outline-primary" for="stock">stock</label>
+        </div>
+      </div>
+
       <table class="table table-striped">
         <thead>
           <tr>
@@ -14,17 +35,19 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let producto of listaproducto">
-            <td>{{producto.producto}}</td>
+          <tr *ngFor="let producto of listaproducto | ordenar:nameOrden">
+            <td>{{producto.producto }}</td>
+
             <td>{{producto.modelo}}</td>
-            <td>{{producto.proveedor}}</td>
+            <td>{{producto.proveedor }}</td>
             <td>{{producto.precio | currency}}</td>
-            <td>{{producto.stock}}</td>
+            <td>{{producto.stock | generalpipe }}</td>
             <td>
-              <button type="button" *ngIf="!validarStock(producto)" class="btn btn-success me-2"
-                (click)="agregarProducto(producto)">Agregar</button>
               <button type="button" *ngIf="validarStock(producto)" class="btn btn-success me-2"
+                (click)="agregarProducto(producto)">Agregar</button>
+              <button type="button" *ngIf="!validarStock(producto)" class="btn btn-success me-2"
                 (click)="agregarProducto(producto)" disabled>Agregar</button>
+
               <app-detalleproducto [modalProducto]="producto.productoid" [producto]="producto"></app-detalleproducto>
             </td>
           </tr>
@@ -33,7 +56,8 @@
     </div>
 
     <div>
-      <app-agregarproducto></app-agregarproducto>
+      <app-agregarproducto (eventoModal)="nuevoProducto($event)"
+        (eventoCierreModal)="mensajeCerrar($event)"></app-agregarproducto>
     </div>
 
 
@@ -80,13 +104,16 @@
         <label for="subtotalProductos">Subtotal:</label>
         <input type="text" value="{{subtotal | currency}}" id="subtotalProductos" class="form-control" readonly>
 
+        <label for="subtotalProductos">Descuento:</label>
+        <input type="text" value="{{descuento | currency}}" id="descuentoProductos" class="form-control" readonly>
+
         <label for="ivaProductos">Iva 12%:</label>
         <input type="text" value="{{impuesto | currency}}" id="ivaProductos" class="form-control" readonly>
 
         <label for="totalPagoProductos">Total a pagar:</label>
         <input type="text" value="{{totalpago | currency}} " id="totalPagoProductos" class="form-control" readonly>
 
-        <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-3 ">
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-lg-4 mb-lg-4">
           <button type="button" *ngIf="ValidBtPago()" class="btn btn-success me-md-2 w-50"> Pagar </button>
           <button type="button" *ngIf="!ValidBtPago()" class="btn btn-success me-md-2 w-50" disabled> Pagar </button>
         </div>
