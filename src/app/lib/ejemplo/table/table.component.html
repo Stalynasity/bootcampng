@@ -19,7 +19,7 @@
             <td>{{producto.producto}}</td>
             <td>{{producto.modelo}}</td>
             <td>{{producto.proveedor}}</td>
-            <td>{{producto.precio}}</td>
+            <td>{{producto.precio | currency}}</td>
             <td>{{producto.stock}}</td>
             <td>
               <button type="button" *ngIf="!validarStock(producto)" class="btn btn-success me-2" (click)="agregarProducto(producto)">Agregar</button>
@@ -51,7 +51,7 @@
               <td>{{producto.producto}}</td>
               <td>{{producto.modelo}}</td>
               <td>{{producto.proveedor}}</td>
-              <td>{{producto.precio}}</td>
+              <td>{{producto.precio | currency}}</td>
               <td>{{producto.cantidad}}</td>
               <td>
                 <!-- <button type="button" class="btn btn-danger me-2" (click)="eliminarProducto(producto)">Eliminar</button> -->
@@ -68,16 +68,21 @@
       <div class="row">
 
         <label for="totalProductos">Total Productos:</label>
-        <input type="text" value="{{totalProducto}}" id="totalProductos" class="form-control" readonly>
+        <input type="text" value="{{totalProducto | currency}}" id="totalProductos" class="form-control" readonly>
 
         <label for="subtotalProductos">Subtotal:</label>
-        <input type="text" value="{{subtotal}}" id="subtotalProductos" class="form-control" readonly>
+        <input type="text" value="{{subtotal | currency}}" id="subtotalProductos" class="form-control" readonly>
 
         <label for="ivaProductos">Iva 12%:</label>
-        <input type="text" value="{{impuesto}}" id="ivaProductos" class="form-control" readonly>
+        <input type="text" value="{{impuesto | currency}}" id="ivaProductos" class="form-control" readonly>
 
         <label for="totalPagoProductos">Total a pagar:</label>
-        <input type="text" value="{{totalpago}}" id="totalPagoProductos" class="form-control" readonly>
+        <input type="text" value="{{totalpago | currency}} " id="totalPagoProductos" class="form-control" readonly>
+
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-3 ">
+          <button type="button" *ngIf="ValidBtPago()" class="btn btn-success me-md-2 w-50" > Pagar </button>
+          <button type="button" *ngIf="!ValidBtPago()" class="btn btn-success me-md-2 w-50" disabled> Pagar </button>
+        </div>
 
       </div>
     </div>

@@ -144,9 +144,17 @@ export class TableComponent {
 
   porpiedadesBtnTB: PropertiesBtnTabla = {
     labelEdiar: "Editar",
-    mostrarEditar: true,
     labelEliminar: "Eliminar",
+    mostrarEditar: true,
     mostrarEliminar: true,
+  }
+
+
+  ValidBtPago(): boolean {
+    if (this.totalpago !== 0) {
+      return true
+    }
+    return false
   }
 
 

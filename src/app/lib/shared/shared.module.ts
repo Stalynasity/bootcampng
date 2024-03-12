@@ -6,6 +6,7 @@ import { LoadingComponent } from './loading/loading.component';
 import { BotonestablaComponent } from './botonestabla/botonestabla.component';
 import { MenuComponent } from './menu/menu.component';
 import { FormsModule } from '@angular/forms';
+import { AgregarproductoComponent } from './agregarproducto/agregarproducto.component';
 
 
 
@@ -16,6 +17,7 @@ import { FormsModule } from '@angular/forms';
     InputfornComponent,
     LoadingComponent,
     MenuComponent,
+    AgregarproductoComponent,
 
   ],
   imports: [
@@ -27,7 +29,8 @@ import { FormsModule } from '@angular/forms';
     HeaderComponent,
     InputfornComponent,
     LoadingComponent,
-    MenuComponent
+    MenuComponent,
+    AgregarproductoComponent
   ]
 })
 export class SharedModule { }

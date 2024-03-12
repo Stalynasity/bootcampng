@@ -19,7 +19,7 @@
           <ul class="list-group list-group-flush">
             <li class="list-group-item">{{producto.modelo}}</li>
             <li class="list-group-item">{{producto.proveedor}}</li>
-            <li class="list-group-item">{{producto.precio}}</li>
+            <li class="list-group-item">{{producto.precio | currency }}</li>
             <li class="list-group-item">
               <div [ngSwitch]="producto.categoria">
                 <ng-template ngSwitchCase="OC">
