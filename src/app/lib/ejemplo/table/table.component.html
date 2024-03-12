@@ -1,4 +1,3 @@
-
 <div class="container">
   <div class="row">
     <div>
@@ -11,7 +10,7 @@
             <th>Proveedores</th>
             <th>Precio</th>
             <th>Stock</th>
-            <th colspan="2">Acciones</th>
+            <th class="text-center" colspan="2">Acciones</th>
           </tr>
         </thead>
         <tbody>
@@ -22,14 +21,21 @@
             <td>{{producto.precio | currency}}</td>
             <td>{{producto.stock}}</td>
             <td>
-              <button type="button" *ngIf="!validarStock(producto)" class="btn btn-success me-2" (click)="agregarProducto(producto)">Agregar</button>
-              <button type="button" *ngIf="validarStock(producto)" class="btn btn-success me-2" (click)="agregarProducto(producto)" disabled>Agregar</button>
-              <app-detalleproducto [modalProducto]="producto.productoid" [producto]="producto" ></app-detalleproducto>
+              <button type="button" *ngIf="!validarStock(producto)" class="btn btn-success me-2"
+                (click)="agregarProducto(producto)">Agregar</button>
+              <button type="button" *ngIf="validarStock(producto)" class="btn btn-success me-2"
+                (click)="agregarProducto(producto)" disabled>Agregar</button>
+              <app-detalleproducto [modalProducto]="producto.productoid" [producto]="producto"></app-detalleproducto>
             </td>
           </tr>
         </tbody>
       </table>
     </div>
+
+    <div>
+      <app-agregarproducto></app-agregarproducto>
+    </div>
+
 
 
     <div class="col-md-6 ">
@@ -55,7 +61,8 @@
               <td>{{producto.cantidad}}</td>
               <td>
                 <!-- <button type="button" class="btn btn-danger me-2" (click)="eliminarProducto(producto)">Eliminar</button> -->
-                <app-botonestabla [propertiesBtn] = "porpiedadesBtnTB" (eventoEliminar)="eliminarProducto(producto)"></app-botonestabla>
+                <app-botonestabla [propertiesBtn]="porpiedadesBtnTB"
+                  (eventoEliminar)="eliminarProducto(producto)"></app-botonestabla>
               </td>
             </tr>
           </tbody>
@@ -80,7 +87,7 @@
         <input type="text" value="{{totalpago | currency}} " id="totalPagoProductos" class="form-control" readonly>
 
         <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-3 ">
-          <button type="button" *ngIf="ValidBtPago()" class="btn btn-success me-md-2 w-50" > Pagar </button>
+          <button type="button" *ngIf="ValidBtPago()" class="btn btn-success me-md-2 w-50"> Pagar </button>
           <button type="button" *ngIf="!ValidBtPago()" class="btn btn-success me-md-2 w-50" disabled> Pagar </button>
         </div>
 
