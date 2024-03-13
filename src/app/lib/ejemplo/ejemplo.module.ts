@@ -4,13 +4,17 @@ import { DetalleproductoComponent } from './detalleproducto/detalleproducto.comp
 import { TableComponent } from './table/table.component';
 import { SharedModule } from '../shared/shared.module';
 import { FormsModule } from '@angular/forms';
+import { TablacarritoComponent } from './tablacarrito/tablacarrito.component';
+import { ValorespagoComponent } from './valorespago/valorespago.component';
 
 
 
 @NgModule({
   declarations: [
     DetalleproductoComponent,
-    TableComponent
+    TableComponent,
+    TablacarritoComponent,
+    ValorespagoComponent
   ],
   imports: [
     CommonModule,
@@ -19,7 +23,9 @@ import { FormsModule } from '@angular/forms';
   ],
   exports: [
     DetalleproductoComponent,
-    TableComponent
+    TableComponent,
+    TablacarritoComponent,
+    ValorespagoComponent
   ]
 })
 export class EjemploModule { }

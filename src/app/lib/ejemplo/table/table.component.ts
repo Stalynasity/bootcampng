@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ProductDetail } from '../interface/ProductDetail.interface';
 import { HtmlParser } from '@angular/compiler';
 import { PropertiesBtnTabla } from '../../interface/PropertiesBtnTabla.interface';
 import { PropertiesItem } from '../../interface/menuitem.interface';
+import { TablacarritoComponent } from '../tablacarrito/tablacarrito.component';
+import { ValorespagoComponent } from '../valorespago/valorespago.component';
 
 @Component({
   selector: 'app-table',
@@ -11,10 +13,11 @@ import { PropertiesItem } from '../../interface/menuitem.interface';
 })
 export class TableComponent {
 
-  totalProducto: number = 0;
-  subtotal: number = 0;
-  impuesto: number = 0;
-  totalpago: number = 0;
+  @ViewChild(TablacarritoComponent)
+  tableCarrito!: TablacarritoComponent;
+
+  @ViewChild(ValorespagoComponent)
+  valorespago!: ValorespagoComponent;
 
   listaproducto: ProductDetail[] = [
     {
@@ -75,11 +78,10 @@ export class TableComponent {
     }
   ];
 
-  listaCarrito: ProductDetail[] = [];
   nameOrden: string = '';
 
 
-  cambiarOrden(nameOrden: string){
+  cambiarOrden(nameOrden: string) {
     this.nameOrden = nameOrden;
   }
 
@@ -87,59 +89,22 @@ export class TableComponent {
 
 
   agregarProducto(producto: ProductDetail) {
-    const productExistente = this.listaCarrito.find(p => p.productoid === producto.productoid);
-
-    if (productExistente) {
-      if (productExistente.stock <= 0) {
-        console.log("no hay stock");
-      } else {
-        productExistente.stock -= 1;
-        productExistente.cantidad = (productExistente.cantidad || 0) + 1;
-
-      }
-
-    } else {
+    const productExistente = this.tableCarrito.listaCarrito.find(p => p.productoid === producto.productoid);
+    if (!productExistente) {
       producto.cantidad = 1;
       producto.stock -= 1;
-      this.listaCarrito.push(producto)
-
+      this.tableCarrito.listaCarrito.push(producto)
     }
-
+    else if (productExistente.stock >= 0) {
+      productExistente.stock -= 1;
+      productExistente.cantidad = (productExistente.cantidad || 0) + 1;
+    }
     this.realizarCalculo();
   }
 
 
 
-  eliminarProducto(producto: ProductDetail): number | undefined {
-    const indiceProducto = this.listaCarrito.findIndex(p => p.productoid === producto.productoid);
 
-    if (indiceProducto !== -1) {
-      const productoEliminado = this.listaCarrito.splice(indiceProducto, 1)[0];
-      productoEliminado.stock += productoEliminado.cantidad!;
-      this.realizarCalculo();
-      return productoEliminado.stock;
-    }
-    return undefined;
-  }
-
-
-
-  realizarCalculo() {
-    this.totalProducto = 0;
-    this.subtotal = 0;
-    // this.impuesto = 0;
-    // this.totalpago = 0;
-
-    this.listaCarrito.forEach(producto => {
-      this.totalProducto += producto.cantidad ?? 0;
-      this.subtotal += (producto.precio * (producto.cantidad ?? 0));
-    });
-
-    let descuento = this.subtotal - (this.subtotal * 0.02);
-    let iva = descuento + (descuento * 0.12);
-    this.totalpago = iva;
-
-  }
 
 
 
@@ -155,25 +120,7 @@ export class TableComponent {
 
 
 
-  porpiedadesBtnTB: PropertiesBtnTabla = {
-    labelEdiar: "Editar",
-    labelEliminar: "Eliminar",
-    mostrarEditar: true,
-    mostrarEliminar: true,
-  }
-
-
-
-  ValidBtPago(): boolean {
-    if (this.totalProducto !== 0) {
-      return true
-    }
-    return false
-  }
-
-
-
-  nuevoProducto(producto: ProductDetail){
+  nuevoProducto(producto: ProductDetail) {
     let ultimoId = this.listaproducto.length + 1;
     producto.productoid = ultimoId;
     this.listaproducto.push(producto)
@@ -181,7 +128,25 @@ export class TableComponent {
 
 
 
-  mensajeCerrar(e:any){
+  mensajeCerrar(e: any) {
+  }
+
+
+  realizarCalculo() {
+    this.valorespago.totalProducto = 0;
+    this.valorespago.subtotal = 0;
+    // this.impuesto = 0;
+    // this.totalpago = 0;
+
+    this.tableCarrito.listaCarrito.forEach(producto => {
+      this.valorespago.totalProducto += producto.cantidad ?? 0;
+      this.valorespago.subtotal += (producto.precio * (producto.cantidad ?? 0));
+    });
+
+    let descuento = this.valorespago.subtotal - (this.valorespago.subtotal * 0.02);
+    let iva = descuento + (descuento * 0.12);
+    this.valorespago.totalpago = iva;
+
   }
 
 }

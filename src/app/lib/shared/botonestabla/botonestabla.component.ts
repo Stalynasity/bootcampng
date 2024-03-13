@@ -16,6 +16,9 @@ export class BotonestablaComponent {
     mostrarEditar: true,
     labelEliminar: "Eliminar",
     mostrarEliminar: true,
+    bootstrapEditar: 'primary',
+    bootstrapEliminar: 'danger'
+
   }
 
   eventEliminar(){

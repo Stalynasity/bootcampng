@@ -3,4 +3,6 @@ export interface PropertiesBtnTabla {
   labelEliminar?:string;
   mostrarEditar:boolean;
   mostrarEliminar:boolean;
+  bootstrapEditar:string;
+  bootstrapEliminar:string;
 };

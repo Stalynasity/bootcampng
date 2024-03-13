@@ -1,0 +1,30 @@
+
+  <h2>Productos Agregados</h2>
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Producto</th>
+          <th>Modelo</th>
+          <th>Proveedores</th>
+          <th>Precio</th>
+          <th>Cantidad</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let producto of listaCarrito">
+          <td>{{producto.producto}}</td>
+          <td>{{producto.modelo}}</td>
+          <td>{{producto.proveedor}}</td>
+          <td>{{producto.precio | currency}}</td>
+          <td>{{producto.cantidad}}</td>
+          <td>
+            <!-- <button type="button" class="btn btn-danger me-2" (click)="eliminarProducto(producto)">Eliminar</button> -->
+            <app-botonestabla [propertiesBtn]="porpiedadesBtnTB"
+              (eventoEliminar)="eliminarProducto(producto)"></app-botonestabla>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

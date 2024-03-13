@@ -1,6 +1,6 @@
 <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-  <button type="button" *ngIf="propertiesBtn.mostrarEditar" class="btn btn-success" (click)="eventEditar()"> {{ propertiesBtn.labelEdiar }}
+  <button type="button" *ngIf="propertiesBtn.mostrarEditar" class="btn btn-{{propertiesBtn.bootstrapEditar}}" (click)="eventEditar()"> {{ propertiesBtn.labelEdiar }}
   </button>
-  <button type="button" *ngIf="propertiesBtn.mostrarEliminar" class="btn btn-danger" (click)="eventEliminar()"> {{ propertiesBtn.labelEliminar}}
+  <button type="button" *ngIf="propertiesBtn.mostrarEliminar" class="btn btn-{{propertiesBtn.bootstrapEliminar}}" (click)="eventEliminar()"> {{ propertiesBtn.labelEliminar}}
   </button>
 </div>

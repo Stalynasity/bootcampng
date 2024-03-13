@@ -6,19 +6,24 @@
       <div>
         <span class="text-primary me-3"><b>Ordenar por: </b></span>
         <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-          <input type="radio" class="btn-check" name="btnorden" id="nombre" (click)="cambiarOrden('nombre')" autocomplete="off" checked>
+          <input type="radio" class="btn-check" name="btnorden" id="nombre" (click)="cambiarOrden('nombre')"
+            autocomplete="off" checked>
           <label class="btn btn-outline-primary" for="nombre">Nombre</label>
 
-          <input type="radio" class="btn-check" name="btnorden" id="modelo" (click)="cambiarOrden('modelo')" autocomplete="off">
+          <input type="radio" class="btn-check" name="btnorden" id="modelo" (click)="cambiarOrden('modelo')"
+            autocomplete="off">
           <label class="btn btn-outline-primary" for="modelo">Modelo</label>
 
-          <input type="radio" class="btn-check" name="btnorden" id="proveedor" (click)="cambiarOrden('proveedor')" autocomplete="off">
+          <input type="radio" class="btn-check" name="btnorden" id="proveedor" (click)="cambiarOrden('proveedor')"
+            autocomplete="off">
           <label class="btn btn-outline-primary" for="proveedor">Proveedor</label>
 
-          <input type="radio" class="btn-check" name="btnorden" id="precio" (click)="cambiarOrden('precio')" autocomplete="off">
+          <input type="radio" class="btn-check" name="btnorden" id="precio" (click)="cambiarOrden('precio')"
+            autocomplete="off">
           <label class="btn btn-outline-primary" for="precio">Precio</label>
 
-          <input type="radio" class="btn-check" name="btnorden" id="stock" (click)="cambiarOrden('stock')" autocomplete="off">
+          <input type="radio" class="btn-check" name="btnorden" id="stock" (click)="cambiarOrden('stock')"
+            autocomplete="off">
           <label class="btn btn-outline-primary" for="stock">stock</label>
         </div>
       </div>
@@ -55,70 +60,19 @@
       </table>
     </div>
 
-    <div class="mb-3" >
+    <div class="mb-3">
       <app-agregarproducto (eventoModal)="nuevoProducto($event)"
         (eventoCierreModal)="mensajeCerrar($event)"></app-agregarproducto>
     </div>
 
 
-
     <div class="col-md-6 ">
-      <h2>Productos Agregados</h2>
-      <div class="table-responsive">
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th>Producto</th>
-              <th>Modelo</th>
-              <th>Proveedores</th>
-              <th>Precio</th>
-              <th>Cantidad</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let producto of listaCarrito">
-              <td>{{producto.producto}}</td>
-              <td>{{producto.modelo}}</td>
-              <td>{{producto.proveedor}}</td>
-              <td>{{producto.precio | currency}}</td>
-              <td>{{producto.cantidad}}</td>
-              <td>
-                <!-- <button type="button" class="btn btn-danger me-2" (click)="eliminarProducto(producto)">Eliminar</button> -->
-                <app-botonestabla [propertiesBtn]="porpiedadesBtnTB"
-                  (eventoEliminar)="eliminarProducto(producto)"></app-botonestabla>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <app-tablacarrito (inputFactura)="realizarCalculo()"></app-tablacarrito>
     </div>
 
+
     <div class="col-md-4 mx-auto">
-      <h2>Factura</h2>
-      <div class="row">
-
-        <label for="totalProductos">Total Productos:</label>
-        <input type="text" value="{{totalProducto | currency}}" id="totalProductos" class="form-control" readonly>
-
-        <label for="subtotalProductos">Subtotal:</label>
-        <input type="text" value="{{subtotal | currency}}" id="subtotalProductos" class="form-control" readonly>
-
-        <label for="subtotalProductos">Descuento:</label>
-        <input type="text" value="{{subtotal | descuento | currency }}" id="descuentoProductos" class="form-control" readonly>
-
-        <label for="ivaProductos">Iva 12%:</label>
-        <input type="text" value="{{subtotal | descuento | iva }}" id="ivaProductos" class="form-control" readonly>
-
-        <label for="totalPagoProductos">Total a pagar:</label>
-        <input type="text" value="{{totalpago | currency}} " id="totalPagoProductos" class="form-control" readonly>
-
-        <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-lg-4 mb-lg-4">
-          <button type="button" *ngIf="ValidBtPago()" class="btn btn-success me-md-2 w-50"> Pagar </button>
-          <button type="button" *ngIf="!ValidBtPago()" class="btn btn-success me-md-2 w-50" disabled> Pagar </button>
-        </div>
-
-      </div>
+      <app-valorespago></app-valorespago>
     </div>
 
 
