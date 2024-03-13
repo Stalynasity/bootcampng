@@ -11,6 +11,7 @@ import { GeneralpipePipe } from './pipes/generalpipe.pipe';
 import { OrdenarPipe } from './pipes/ordenar.pipe';
 import { DescuentoPipe } from './pipes/descuento.pipe';
 import { IvaPipe } from './pipes/iva.pipe';
+import { BotonordenarComponent } from './botonordenar/botonordenar.component';
 
 
 
@@ -25,7 +26,8 @@ import { IvaPipe } from './pipes/iva.pipe';
     GeneralpipePipe,
     OrdenarPipe,
     DescuentoPipe,
-    IvaPipe
+    IvaPipe,
+    BotonordenarComponent
 
   ],
   imports: [
@@ -42,7 +44,8 @@ import { IvaPipe } from './pipes/iva.pipe';
     GeneralpipePipe,
     OrdenarPipe,
     DescuentoPipe,
-    IvaPipe
+    IvaPipe,
+    BotonordenarComponent
   ]
 })
 export class SharedModule { }

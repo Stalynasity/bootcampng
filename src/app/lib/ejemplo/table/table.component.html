@@ -4,28 +4,7 @@
       <h2>Lista de Productos</h2>
 
       <div>
-        <span class="text-primary me-3"><b>Ordenar por: </b></span>
-        <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-          <input type="radio" class="btn-check" name="btnorden" id="nombre" (click)="cambiarOrden('nombre')"
-            autocomplete="off" checked>
-          <label class="btn btn-outline-primary" for="nombre">Nombre</label>
-
-          <input type="radio" class="btn-check" name="btnorden" id="modelo" (click)="cambiarOrden('modelo')"
-            autocomplete="off">
-          <label class="btn btn-outline-primary" for="modelo">Modelo</label>
-
-          <input type="radio" class="btn-check" name="btnorden" id="proveedor" (click)="cambiarOrden('proveedor')"
-            autocomplete="off">
-          <label class="btn btn-outline-primary" for="proveedor">Proveedor</label>
-
-          <input type="radio" class="btn-check" name="btnorden" id="precio" (click)="cambiarOrden('precio')"
-            autocomplete="off">
-          <label class="btn btn-outline-primary" for="precio">Precio</label>
-
-          <input type="radio" class="btn-check" name="btnorden" id="stock" (click)="cambiarOrden('stock')"
-            autocomplete="off">
-          <label class="btn btn-outline-primary" for="stock">stock</label>
-        </div>
+        <app-botonordenar (nombretabla)="nameOrden($event)"></app-botonordenar>
       </div>
 
       <table class="table table-striped">
@@ -40,7 +19,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let producto of listaproducto | ordenar:nameOrden">
+          <tr *ngFor="let producto of listaproducto | ordenar:name">
             <td>{{producto.producto }}</td>
 
             <td>{{producto.modelo}}</td>
@@ -60,14 +39,14 @@
       </table>
     </div>
 
-    <div class="mb-3">
+    <div class="mb-3" #divAgregarProducto>
       <app-agregarproducto (eventoModal)="nuevoProducto($event)"
         (eventoCierreModal)="mensajeCerrar($event)"></app-agregarproducto>
     </div>
 
 
     <div class="col-md-6 ">
-      <app-tablacarrito (inputFactura)="realizarCalculo()"></app-tablacarrito>
+      <app-tablacarrito (inputFactura)="realizarCalculo()" (validaCarr)="validarCarrito()"></app-tablacarrito>
     </div>
 
 

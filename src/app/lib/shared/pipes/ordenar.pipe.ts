@@ -21,7 +21,7 @@ export class OrdenarPipe implements PipeTransform {
       case 'stock':
         return productos.sort((a, b) => (a.stock > b.stock) ? 1 : -1);
       default:
-        return productos;
+        return productos.sort((a, b) => (a.producto > b.producto) ? 1 : -1);
     }
   }
 }

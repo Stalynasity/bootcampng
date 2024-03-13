@@ -1,8 +1,5 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ProductDetail } from '../interface/ProductDetail.interface';
-import { HtmlParser } from '@angular/compiler';
-import { PropertiesBtnTabla } from '../../interface/PropertiesBtnTabla.interface';
-import { PropertiesItem } from '../../interface/menuitem.interface';
 import { TablacarritoComponent } from '../tablacarrito/tablacarrito.component';
 import { ValorespagoComponent } from '../valorespago/valorespago.component';
 
@@ -13,11 +10,16 @@ import { ValorespagoComponent } from '../valorespago/valorespago.component';
 })
 export class TableComponent {
 
+  //ViewChild nos trae como una l
   @ViewChild(TablacarritoComponent)
   tableCarrito!: TablacarritoComponent;
 
   @ViewChild(ValorespagoComponent)
   valorespago!: ValorespagoComponent;
+
+  @ViewChild('divAgregarProducto', { static: false })
+  divAgregarProducto!: ElementRef;
+
 
   listaproducto: ProductDetail[] = [
     {
@@ -78,36 +80,14 @@ export class TableComponent {
     }
   ];
 
-  nameOrden: string = '';
+  name: string = "";
 
-
-  cambiarOrden(nameOrden: string) {
-    this.nameOrden = nameOrden;
+  nameOrden(name: string){
+    this.name = name;
   }
 
 
-
-
-  agregarProducto(producto: ProductDetail) {
-    const productExistente = this.tableCarrito.listaCarrito.find(p => p.productoid === producto.productoid);
-    if (!productExistente) {
-      producto.cantidad = 1;
-      producto.stock -= 1;
-      this.tableCarrito.listaCarrito.push(producto)
-    }
-    else if (productExistente.stock >= 0) {
-      productExistente.stock -= 1;
-      productExistente.cantidad = (productExistente.cantidad || 0) + 1;
-    }
-    this.realizarCalculo();
-  }
-
-
-
-
-
-
-
+  // Habilitar y desabilitar el boton Agregar de mi component padre
   validarStock(prodSeleccionado: ProductDetail): boolean {
     let identificarProd = this.listaproducto.find(p => p.productoid === prodSeleccionado.productoid)
     if (identificarProd) {
@@ -118,20 +98,22 @@ export class TableComponent {
     return false;
   }
 
-
-
-  nuevoProducto(producto: ProductDetail) {
-    let ultimoId = this.listaproducto.length + 1;
-    producto.productoid = ultimoId;
-    this.listaproducto.push(producto)
+  // mostrar o ocultar el boton para agregar producto
+  validarCarrito() {
+    if (this.tableCarrito.listaCarrito.length !== 0) {
+      this.divAgregarProducto.nativeElement.style.display = 'none';
+    } else {
+      this.divAgregarProducto.nativeElement.style.display = 'flex';
+    }
   }
 
 
 
+  //aun no se usa
   mensajeCerrar(e: any) {
   }
 
-
+  // se hace el calculo de mi factura en mi component hija tabla carrito
   realizarCalculo() {
     this.valorespago.totalProducto = 0;
     this.valorespago.subtotal = 0;
@@ -146,7 +128,31 @@ export class TableComponent {
     let descuento = this.valorespago.subtotal - (this.valorespago.subtotal * 0.02);
     let iva = descuento + (descuento * 0.12);
     this.valorespago.totalpago = iva;
+  }
 
+
+
+  // agregar producto a mi componente hija TablaCarrito
+  agregarProducto(producto: ProductDetail) {
+    const productExistente = this.tableCarrito.listaCarrito.find(p => p.productoid === producto.productoid);
+    if (!productExistente) {
+      producto.cantidad = 1;
+      producto.stock -= 1;
+      this.tableCarrito.listaCarrito.push(producto)
+    }
+    else if (productExistente.stock >= 0) {
+      productExistente.stock -= 1;
+      productExistente.cantidad = (productExistente.cantidad || 0) + 1;
+    }
+    this.realizarCalculo();
+    this.validarCarrito();
+  }
+
+  // Se agrega un nuevo producto al listado se usa en el compo hija agregarproducto
+  nuevoProducto(producto: ProductDetail) {
+    let ultimoId = this.listaproducto.length + 1;
+    producto.productoid = ultimoId;
+    this.listaproducto.push(producto)
   }
 
 }

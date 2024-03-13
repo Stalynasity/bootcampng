@@ -21,12 +21,14 @@ export class TablacarritoComponent {
   }
 
   @Output() inputFactura = new EventEmitter<any>()
+  @Output() validaCarr = new EventEmitter<any>()
 
-
+  // se elimina el producto seleccionado y ejecuta los eventos que emito
   eliminarProducto(producto: ProductDetail): void {
     const indiceProducto = this.listaCarrito.findIndex(p => p.productoid === producto.productoid);
     const productoEliminado = this.listaCarrito.splice(indiceProducto, 1)[0];
     productoEliminado.stock += productoEliminado.cantidad!;
-    this.inputFactura.emit()
+    this.inputFactura.emit();
+    this.validaCarr.emit();
   }
 }
